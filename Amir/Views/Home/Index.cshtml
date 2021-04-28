@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Content/script/app/index/indexService.js"></script>
+<script src="~/Content/script/app/index/indexCtrl.js"></script>
+<div  ng-controller="indexCtrl as ctrl">
+    {{ctrl.data}}
+    <hr/>
+    {{ctrl.test.name}}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>ردیف</th>
+                <th>نام</th>
+                <th>ویرایش</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in ctrl.data.list"  class="abc {{x.id%2==0?'color':''}}">
+                <td>{{$index+1}}</td>
+                <td>{{x.Id}}</td>
+                <td>{{x.Name}}</td>
+                <td><button ng-click="ctrl.handleShowEditPanel(x)" class="btn btn-primary">ویرایش</button>  </td>
+                <td><button  ng-click="ctrl.handleDeleteUser($event,x)" class="btn btn-danger">حذف</button>  </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr/>
+    
+
+    <div ng-show="ctrl.showEditPanelFlag">
+        <input type="text" ng-model="ctrl.user.Id" />
+        <input type="text" ng-model="ctrl.user.Name" />
+        <button ng-click="ctrl.handlePersistUser()" class="btn btn-primary">ثبت تغیرات</button> 
+    </div>
+</div>
